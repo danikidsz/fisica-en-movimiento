@@ -1,0 +1,353 @@
+/* ─── Tokens ─────────────────────────────────────────────── */
+:root {
+  /* Identidad UAO 2026: rojo y crema dominantes; vino, granate, coral y blanco subordinados */
+  --red: #ff051e;        /* acentos, fondos de botón, texto grande */
+  --red-ink: #AC0B32;    /* rojo para texto pequeño (contraste ≥ 4,5:1) */
+  --red-soft: #FFE7E2;
+  --wine: #8A1428;
+  --coral: #FF836C;
+  --white: #ffffff;
+  --black: #1A1A1A;
+  --ink: #1A1A1A;
+  --navy: #8A1428;       /* bloques oscuros: vino UAO (antes azul) */
+  --navy-2: #AC0B32;
+  --gray: #F3ECE1;
+  --cream: #FBF5EC;
+  --muted: #4D4D4D;      /* texto secundario sobre crema */
+  --line: rgba(26, 26, 26, 0.12);
+  --ok: #00866D;
+  --ok-soft: #E0EEE6;
+
+  --font: 'DM Sans Variable', 'DM Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --radius: 14px;
+  --radius-lg: 24px;
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1180px;
+  --nav-h: 64px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  color-scheme: light;
+}
+
+/* ─── Base ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: var(--nav-h);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg,
+canvas,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-weight: 800;
+  text-wrap: balance;
+}
+/* Titulares UAO: DM Sans black itálica */
+h1,
+.section-title,
+.story__title {
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.03em;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--red);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+[tabindex='-1']:focus {
+  outline: none;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 10px 16px;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: 10px;
+  transform: translateY(-150%);
+  transition: transform 0.2s;
+}
+.skip-link:focus {
+  transform: none;
+}
+
+/* ─── Layout ─────────────────────────────────────────────── */
+.wrap {
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.section {
+  position: relative;
+  padding: clamp(80px, 12vw, 150px) 0;
+}
+
+.section--white {
+  background: var(--white);
+}
+
+.section--navy {
+  background: var(--red);
+  color: var(--white);
+}
+.section--navy .btn--primary {
+  background: var(--cream);
+  color: var(--red);
+}
+.section--navy .btn--primary:hover:not([disabled]) {
+  background: var(--white);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red-ink);
+}
+.eyebrow::before {
+  content: '';
+  width: 28px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--red);
+}
+.section--navy .eyebrow {
+  color: var(--white);
+}
+.section--navy .eyebrow::before {
+  background: var(--cream);
+}
+
+.section-title {
+  margin-top: 18px;
+  font-size: clamp(36px, 6.4vw, 84px);
+  text-transform: uppercase;
+}
+
+.section-lead {
+  margin-top: 20px;
+  max-width: 56ch;
+  font-size: clamp(17px, 1.6vw, 20px);
+  color: var(--muted);
+}
+.section--navy .section-lead {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+/* ─── Botones ────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 26px;
+  border: 0;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn svg {
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn[disabled],
+.btn[aria-disabled='true'] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Rojo con blanco: el texto va en negrita y mayúsculas; el fondo rojo
+   solo se usa en botones grandes. Para texto rojo pequeño, --red-ink. */
+.btn--primary {
+  background: var(--red);
+  color: var(--white);
+  font-size: 16px;
+}
+.btn--primary:hover:not([disabled]) {
+  background: #e30019;
+}
+
+.btn--dark {
+  background: var(--navy);
+  color: var(--white);
+}
+.btn--dark:hover:not([disabled]) {
+  background: var(--navy-2);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--ink);
+  box-shadow: inset 0 0 0 2px var(--line);
+}
+.btn--ghost:hover:not([disabled]) {
+  box-shadow: inset 0 0 0 2px var(--navy);
+}
+.section--navy .btn--ghost {
+  color: var(--white);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+.btn--sm {
+  min-height: 42px;
+  padding: 0 18px;
+  font-size: 13px;
+}
+
+.icon-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--line);
+  transition: background-color 0.2s, transform 0.2s var(--ease);
+}
+.icon-btn:hover:not([disabled]) {
+  background: var(--gray);
+}
+.icon-btn[disabled] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.icon-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ─── Aparición al hacer scroll ──────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+}
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+[data-reveal='2'] {
+  transition-delay: 0.08s;
+}
+[data-reveal='3'] {
+  transition-delay: 0.16s;
+}
+
+/* ─── Estados ────────────────────────────────────────────── */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.25);
+  border-top-color: var(--red);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-box {
+  display: grid;
+  gap: 8px;
+  padding: 24px;
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-reveal] {
+    opacity: 1;
+    transform: none;
+  }
+}

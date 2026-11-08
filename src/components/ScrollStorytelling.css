@@ -1,0 +1,197 @@
+.story {
+  position: relative;
+  background: var(--white);
+}
+
+.story__sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: calc(var(--nav-h) + 12px) 0 24px;
+  overflow: hidden;
+}
+
+.story__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+.story__title {
+  font-size: clamp(28px, 4.2vw, 56px);
+  text-transform: uppercase;
+}
+.story__title span {
+  color: var(--red);
+}
+
+.story__stage {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  place-items: center;
+  padding: 8px var(--gutter);
+}
+.story__svg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.story__ui {
+  display: flex;
+  padding-right: calc(var(--gutter) + 64px); /* espacio para "volver arriba" */
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.story__caption {
+  max-width: 560px;
+  min-height: 118px;
+}
+.story__count {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.story__count strong {
+  color: var(--red-ink);
+}
+.story__cap-title {
+  margin-top: 6px;
+  font-size: clamp(24px, 2.6vw, 34px);
+  animation: capIn 0.5s var(--ease) both;
+}
+.story__cap-text {
+  margin-top: 8px;
+  font-size: 17px;
+  color: var(--muted);
+  animation: capIn 0.5s 0.05s var(--ease) both;
+}
+@keyframes capIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+.story__nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: none;
+}
+.story__dots {
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.story__dots button {
+  display: block;
+  width: 24px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.story__dots button::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  top: 20px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  transition: background-color 0.3s;
+}
+.story__dots button.is-on::after {
+  background: var(--red);
+}
+.story__dots button[aria-current='step']::after {
+  background: var(--navy);
+}
+
+.story__frames-loading,
+.story__frames-state {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 14px;
+}
+.story__frames-state {
+  position: static;
+  transform: none;
+  border-radius: var(--radius);
+  max-width: 48ch;
+}
+
+/* Movimiento reducido: escena final estática + pasos en lista */
+.story--static .story__sticky {
+  position: static;
+  height: auto;
+  padding: clamp(80px, 12vw, 140px) 0;
+  grid-template-rows: auto auto auto;
+}
+.story--static .story__stage {
+  aspect-ratio: 16 / 9;
+}
+.story__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px 32px;
+  margin: 24px auto 0;
+  list-style: none;
+  font-size: 16px;
+  color: var(--muted);
+}
+.story__list span {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--red-ink);
+}
+.story__list strong {
+  color: var(--ink);
+}
+
+@media (max-width: 760px) {
+  .story__svg .sc-vars {
+    display: none; /* ilegibles a este tamaño; el texto del paso los nombra */
+  }
+  .story__stage {
+    align-items: end;
+  }
+  .story__ui {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .story__caption {
+    min-height: 150px;
+  }
+  .story__nav {
+    justify-content: space-between;
+  }
+  .story__dots button {
+    width: 20px;
+  }
+  .story__list {
+    grid-template-columns: 1fr;
+  }
+}

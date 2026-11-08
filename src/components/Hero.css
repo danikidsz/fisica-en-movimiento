@@ -1,0 +1,124 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: calc(var(--nav-h) + 32px) 0 96px;
+  overflow: hidden;
+}
+
+.hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  align-items: center;
+  gap: clamp(24px, 4vw, 64px);
+}
+
+.hero__uni {
+  margin-bottom: 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero__title {
+  margin-top: 20px;
+  font-size: clamp(40px, 5.6vw, 80px);
+  line-height: 0.92;
+  text-transform: uppercase;
+}
+.hero__line {
+  display: block;
+  overflow: hidden;
+  padding: 0.12em 0 0.04em;
+  margin-top: -0.12em;
+}
+.hero__line > span {
+  display: block;
+}
+.hero__title em {
+  font-style: normal;
+  color: var(--red);
+}
+
+.hero__text {
+  margin-top: 28px;
+  max-width: 44ch;
+  font-size: clamp(17px, 1.5vw, 19px);
+  color: var(--muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 28px;
+  margin-top: 36px;
+}
+.hero__motto {
+  font-size: 15px;
+  color: var(--muted);
+}
+.hero__motto strong {
+  color: var(--ink);
+}
+
+.hero__art {
+  position: relative;
+}
+.hero__svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.hero__scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.hero__scroll svg {
+  width: 18px;
+  height: 18px;
+  animation: nudge 1.8s var(--ease) infinite;
+}
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@media (max-width: 860px) {
+  .hero {
+    align-items: flex-start;
+  }
+  .hero__grid {
+    grid-template-columns: 1fr;
+  }
+  .hero__art {
+    order: -1;
+    max-width: 380px;
+    width: 72%;
+    margin: 0 auto -8px;
+  }
+}

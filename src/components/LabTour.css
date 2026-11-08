@@ -1,0 +1,235 @@
+.lab-tour {
+  background: var(--white);
+  overflow: hidden;
+}
+.lab-tour__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+.lab-tour .section-title {
+  font-size: clamp(34px, 4.6vw, 64px);
+}
+.lab-tour .section-title em {
+  color: var(--red);
+}
+
+.lab-tour__mesas {
+  display: grid;
+  gap: 10px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.lab-tour__mesas li {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--cream);
+  transition: background-color 0.3s;
+}
+.lab-tour__mesas b {
+  display: block;
+  font-size: 16px;
+}
+.lab-tour__mesas small {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+}
+.lab-tour__n {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--red);
+  color: var(--cream);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 20px;
+}
+.lab-tour__n svg {
+  width: 20px;
+  height: 20px;
+}
+.lab-tour__mesas li.is-done {
+  background: var(--ok-soft);
+}
+.lab-tour__mesas li.is-done .lab-tour__n {
+  background: var(--wine);
+}
+.lab-tour__count {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--red-ink);
+}
+
+/* Tarjeta: foto del laboratorio + base roja con el arco UAO */
+.lab-tour__card {
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(138, 20, 40, 0.18);
+  background: var(--red);
+}
+.lab-tour__cover {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: var(--black);
+  overflow: hidden;
+}
+.lab-tour__cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s var(--ease);
+}
+.lab-tour__cover:hover img {
+  transform: scale(1.04);
+}
+.lab-tour__play {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin: -42px 0 0 -42px;
+  border-radius: 50%;
+  background: var(--red);
+  color: var(--white);
+  box-shadow: 0 0 0 10px rgba(255, 5, 30, 0.25);
+  animation: lab-pulse 2s infinite;
+}
+.lab-tour__play svg {
+  width: 34px;
+  height: 34px;
+  margin-left: 5px;
+  fill: currentColor;
+}
+@keyframes lab-pulse {
+  50% {
+    box-shadow: 0 0 0 20px rgba(255, 5, 30, 0);
+  }
+}
+.lab-tour__badge {
+  position: absolute;
+  left: 18px;
+  top: 18px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: var(--cream);
+  color: var(--red);
+  font-weight: 900;
+  font-style: italic;
+  font-size: 18px;
+}
+/* el arco: la base roja muerde la foto con una curva, como en el manual UAO */
+.lab-tour__arco {
+  --R: 120px;
+  position: relative;
+  margin-top: -64px;
+  padding: 80px 28px 28px;
+  background: var(--red);
+  color: var(--cream);
+  text-align: center;
+  -webkit-mask: radial-gradient(circle var(--R) at 50% calc(-1 * var(--R) + 64px), #0000 calc(var(--R) - 0.5px), #000 calc(var(--R) + 0.5px));
+  mask: radial-gradient(circle var(--R) at 50% calc(-1 * var(--R) + 64px), #0000 calc(var(--R) - 0.5px), #000 calc(var(--R) + 0.5px));
+}
+.lab-tour__logo {
+  height: 30px;
+  margin: 0 auto 8px;
+}
+.lab-tour__arco p {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.lab-tour__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn--light {
+  background: var(--cream);
+  color: var(--red);
+}
+.btn--light:hover:not([disabled]) {
+  background: var(--white);
+}
+.btn--outline-light {
+  background: transparent;
+  color: var(--cream);
+  box-shadow: inset 0 0 0 2px rgba(251, 245, 236, 0.55);
+}
+.btn--outline-light:hover {
+  box-shadow: inset 0 0 0 2px var(--cream);
+}
+
+/* Ventana del recorrido */
+.lab-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  background: var(--black);
+  animation: lab-in 0.35s var(--ease);
+}
+@keyframes lab-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+.lab-modal__bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 16px;
+  background: var(--red);
+  color: var(--cream);
+  font-weight: 700;
+  font-size: 14px;
+}
+.lab-modal__bar img {
+  height: 24px;
+}
+.lab-modal__bar span {
+  flex: 1;
+}
+.lab-modal iframe {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: var(--cream);
+}
+
+@media (max-width: 860px) {
+  .lab-tour__grid {
+    grid-template-columns: 1fr;
+  }
+  .lab-tour__card {
+    order: -1;
+  }
+  .lab-modal__bar span {
+    display: none;
+  }
+}
+.lab-modal__bar .btn {
+  margin-left: auto;
+}

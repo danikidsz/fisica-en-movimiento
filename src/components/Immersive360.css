@@ -1,0 +1,149 @@
+.immersive__stage {
+  position: relative;
+  margin-top: clamp(36px, 5vw, 64px);
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: #0e1d36;
+}
+.immersive__stage.is-full {
+  border-radius: 0;
+  aspect-ratio: auto;
+}
+
+.immersive__canvas {
+  position: absolute;
+  inset: 0;
+  cursor: grab;
+  touch-action: pan-y; /* deja hacer scroll vertical en el celular */
+}
+.immersive__stage.is-full .immersive__canvas {
+  touch-action: none;
+}
+.immersive__canvas:active {
+  cursor: grabbing;
+}
+.immersive__canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+.immersive__canvas:focus-visible {
+  outline-offset: -4px;
+}
+
+.immersive__state {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 12px;
+  padding: 24px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.85);
+  pointer-events: none;
+}
+.immersive__state--error svg {
+  width: 32px;
+  height: 32px;
+  color: var(--red);
+}
+.immersive__state--error span {
+  max-width: 40ch;
+  font-size: 15px;
+}
+
+.immersive__hint {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border-radius: 999px;
+  background: rgba(17, 17, 17, 0.62);
+  color: var(--white);
+  font-weight: 700;
+  font-size: 15px;
+  pointer-events: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.immersive__hint svg {
+  width: 20px;
+  height: 20px;
+  animation: sway 1.6s ease-in-out infinite;
+}
+@keyframes sway {
+  0%,
+  100% {
+    transform: translateX(-4px) rotate(-8deg);
+  }
+  50% {
+    transform: translateX(4px) rotate(8deg);
+  }
+}
+
+.immersive__badge {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: calc(100% - 32px);
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+}
+.immersive__badge svg {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  color: var(--red-ink);
+}
+
+.immersive__controls {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.immersive__prompts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin: 36px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.immersive__prompts li {
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 16px;
+}
+.immersive__prompts span {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--white);
+}
+
+@media (max-width: 760px) {
+  .immersive__stage {
+    aspect-ratio: 4 / 5;
+  }
+  .immersive__prompts {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
